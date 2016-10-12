@@ -14,4 +14,7 @@ class Task extends AbstractEntity
 
     /* @var string $name */
     public $name;
+
+    /* @var \DateTime $name */
+    public $date;
 }
