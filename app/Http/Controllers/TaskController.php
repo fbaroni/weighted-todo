@@ -9,7 +9,7 @@ class TaskController extends Controller
 {
     public function show($timeStamp = '')
     {
-        $dateTime = $timeStamp == ''? $ (new \DateTime('now')) : '';
+        $dateTime = $timeStamp == ''? (new \DateTime('now')) : '';
 
         if($timeStamp == ''){
 
@@ -20,6 +20,12 @@ class TaskController extends Controller
         $weeklyTasks = $this->getWeeklyTasks($dateTime);
         $monthlyTasks = $this->getMonthlyTasks($dateTime);
         $tasks = $this->getTasks($dateTime);
+        return view('tasks',
+            [
+                'tasks' => $tasks,
+                'weeklyTasks' => $weeklyTasks,
+                'monthlyTasks' => $monthlyTasks,
+            ]);
     }
 
     private function getMonthlyTasks(\DateTime $dateTime)
