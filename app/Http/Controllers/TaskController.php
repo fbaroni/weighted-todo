@@ -11,13 +11,8 @@ class TaskController extends Controller
 {
     public function show(Request $request)
     {
-        $timeStamp = $request->get('timestamp');
-
-        $dateTime = $timeStamp == '' ? (new \DateTime('now')) : '';
-
-        if ($timeStamp == '') {
-
-        }
+        $date = $request->get('date');
+        $dateTime = $date == '' ? (new \DateTime('now')) : (\DateTime::createFromFormat('Ymd', $date));
 
         $weeklyTasks = $this->getWeeklyTasks($dateTime);
         $monthlyTasks = $this->getMonthlyTasks($dateTime);
