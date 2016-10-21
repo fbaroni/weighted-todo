@@ -12,7 +12,7 @@
             @else
                 <h1 class="text-danger">
             @endif
-            {{ $valuation }}&nbsp; %</h1>
+            {{ round($valuation, 2) }}&nbsp; %</h1>
         </div>
     </div>
     <form action="{{ action('TaskController@saveTasks') }}" method="post">
