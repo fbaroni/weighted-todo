@@ -29,27 +29,41 @@ class TaskController extends Controller
                 'tasks' => $tasks,
                 'weeklyTasks' => $weeklyTasks,
                 'monthlyTasks' => $monthlyTasks,
-                'valuation' => ValuationService::getValuation($tasks)
+                'valuation' => ValuationService::getValuation($tasks),
+                'weekValuation' => ValuationService::getValuation($weeklyTasks),
+                'monthValuation' => ValuationService::getValuation($monthlyTasks),
             ]);
     }
 
-    public function saveTasks(Request $request)
+    public function saveTasks(Request $request, $type)
     {
         if ($request->isMethod('POST')) {
             foreach ($request->request->get('tasks') as $index => $requestTask) {
                 if ($requestTask['priority'] == '') {
                     continue;
                 }
-                $this->saveTask($requestTask, $index);
+                $this->saveTask($requestTask, $index, $type);
             }
 
             return redirect()->route('show');
         }
     }
 
-    private function saveTask($requestTask, $indexTask)
+    private function saveTask($requestTask, $indexTask, $type)
     {
-        $task = $indexTask == 'new' ? new Task() : Task::find($indexTask);
+        $task = '';
+        switch($type){
+            case 'day':
+                $task = $indexTask == 'new' ? new Task() : Task::find($indexTask);
+                break;
+            case 'week':
+                $task = $indexTask == 'new' ? new WeeklyTask() : WeeklyTask::find($indexTask);
+                break;
+            case 'month':
+                $task = $indexTask == 'new' ? new MonthlyTask() : MonthlyTask::find($indexTask);
+                break;
+
+        }
 
         if (!$task) {
             //TODO throw new AppException
@@ -60,7 +74,19 @@ class TaskController extends Controller
         $task->progress = $requestTask['progress'];
         $task->name = $requestTask['name'];
         $task->description = $requestTask['description'];
-        $task->date = new \DateTime('now');
+        $dateTimeNow = new \DateTime('now');
+
+        switch($type){
+            case 'day':
+                $task->date = $dateTimeNow;
+                break;
+            case 'week':
+                $task->week = $dateTimeNow->format("W");
+                break;
+            case 'month':
+                $task->month = $dateTimeNow->format("m");
+                break;
+        }
 
         return $task->save();
     }
