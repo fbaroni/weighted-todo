@@ -12,3 +12,6 @@
 */
 Route::post('/save/{type}', 'TaskController@saveTasks')->name('saveTasks');
 Route::get('/', 'TaskController@show')->name('show');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

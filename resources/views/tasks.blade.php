@@ -24,16 +24,13 @@
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <table class="table">
                         <thead class="thead-default">
-                        <th>
+                        <th class="col-lg-1 col-md-1 col-sm-1">
                             Priority
                         </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
+                        <th class="col-lg-4 col-md-5 col-sm-6">
                             Description
                         </th>
-                        <th>
+                        <th class="col-lg-1 col-md-1 col-sm-1">
                             Progress
                         </th>
                         </thead>
@@ -44,8 +41,8 @@
                                            value="{{ $task->priority }}"/></td>
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
-                                <td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"
-                                           value="{{ $task->description }}"/></td>
+                                {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
+                                           {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -54,7 +51,7 @@
                             <td><input type="text" name="tasks[new][priority]" class="form-control"/></td>
                             <td><input type="text" name="tasks[new][name]" placeholder="New Task" class="form-control"/>
                             </td>
-                            <td><input type="text" name="tasks[new][description]" class="form-control"/></td>
+                            {{--<td><input type="text" name="tasks[new][description]" class="form-control"/></td>--}}
                             <td><input type="text" name="tasks[new][progress]" class="form-control"/></td>
                         </tr>
                         </tbody>
@@ -88,16 +85,13 @@
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <table class="table">
                         <thead class="thead-default">
-                        <th>
+                        <th class="col-lg-1 col-md-1 col-sm-1">
                             Priority
                         </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
+                        <th class="col-lg-4 col-md-5 col-sm-6">
                             Description
                         </th>
-                        <th>
+                        <th class="col-lg-1 col-md-1 col-sm-1">
                             Progress
                         </th>
                         </thead>
@@ -108,8 +102,8 @@
                                            value="{{ $task->priority }}"/></td>
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
-                                <td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"
-                                           value="{{ $task->description }}"/></td>
+                                {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
+                                           {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -118,7 +112,7 @@
                             <td><input type="text" name="tasks[new][priority]" class="form-control"/></td>
                             <td><input type="text" name="tasks[new][name]" placeholder="New Task" class="form-control"/>
                             </td>
-                            <td><input type="text" name="tasks[new][description]" class="form-control"/></td>
+                            {{--<td><input type="text" name="tasks[new][description]" class="form-control"/></td>--}}
                             <td><input type="text" name="tasks[new][progress]" class="form-control"/></td>
                         </tr>
                         </tbody>
@@ -150,16 +144,13 @@
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <table class="table">
                         <thead class="thead-default">
-                        <th>
+                        <th class="col-lg-1 col-md-1 col-sm-1">
                             Priority
                         </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
+                        <th class="col-lg-4 col-md-5 col-sm-6">
                             Description
                         </th>
-                        <th>
+                        <th class="col-lg-1 col-md-1 col-sm-1">
                             Progress
                         </th>
                         </thead>
@@ -170,8 +161,8 @@
                                            value="{{ $task->priority }}"/></td>
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
-                                <td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"
-                                           value="{{ $task->description }}"/></td>
+                                {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
+                                           {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -180,7 +171,7 @@
                             <td><input type="text" name="tasks[new][priority]" class="form-control"/></td>
                             <td><input type="text" name="tasks[new][name]" placeholder="New Task" class="form-control"/>
                             </td>
-                            <td><input type="text" name="tasks[new][description]" class="form-control"/></td>
+                            {{--<td><input type="text" name="tasks[new][description]" class="form-control"/></td>--}}
                             <td><input type="text" name="tasks[new][progress]" class="form-control"/></td>
                         </tr>
                         </tbody>

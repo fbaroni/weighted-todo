@@ -11,13 +11,8 @@ class TaskController extends Controller
 {
     public function show(Request $request)
     {
-        $timeStamp = $request->get('timestamp');
-
-        $dateTime = $timeStamp == '' ? (new \DateTime('now')) : '';
-
-        if ($timeStamp == '') {
-
-        }
+        $date = $request->get('date');
+        $dateTime = $date == '' ? (new \DateTime('now')) : (\DateTime::createFromFormat('Ymd', $date));
 
         $weeklyTasks = $this->getWeeklyTasks($dateTime);
         $monthlyTasks = $this->getMonthlyTasks($dateTime);
@@ -73,7 +68,7 @@ class TaskController extends Controller
         $task->priority = $requestTask['priority'];
         $task->progress = $requestTask['progress'];
         $task->name = $requestTask['name'];
-        $task->description = $requestTask['description'];
+//        $task->description = $requestTask['description'];
         $dateTimeNow = new \DateTime('now');
 
         switch($type){

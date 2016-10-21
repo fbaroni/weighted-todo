@@ -8,6 +8,9 @@ class ValuationService
     static public function getValuation($tasks)
     {
         $totalItems = count($tasks);
+        if($totalItems == 0){
+            return 0.0;
+        }
         $totalPoundered = 0.0;
         $totalDonePoundered = 0.0;
 
