@@ -5,6 +5,7 @@ use App\Model\MonthlyTask;
 use App\Model\Task;
 use App\Model\WeeklyTask;
 use Illuminate\Http\Request;
+use Domain\Service\ValuationService;
 
 class TaskController extends Controller
 {
@@ -28,7 +29,7 @@ class TaskController extends Controller
                 'tasks' => $tasks,
                 'weeklyTasks' => $weeklyTasks,
                 'monthlyTasks' => $monthlyTasks,
-                'valuation' => $this->getValuation($tasks)
+                'valuation' => ValuationService::getValuation($tasks)
             ]);
     }
 
@@ -64,20 +65,6 @@ class TaskController extends Controller
         return $task->save();
     }
 
-    private function getValuation($tasks)
-    {
-        $totalItems = count($tasks);
-        var_dump($totalItems);
-        $totalPoundered = 0.0;
-        $totalDonePoundered = 0.0;
-
-        foreach ($tasks as $task) {
-            $totalPoundered += (1.0 - 1.0 * (($task->priority - 1) / $totalItems));
-            $totalDonePoundered += ($task->progress - $task->progress*(($task->priority - 1.0) / $totalItems));
-        }
-
-        return ($totalDonePoundered / $totalPoundered ) * 100.0;
-    }
 
     private
     function getMonthlyTasks(\DateTime $dateTime)
