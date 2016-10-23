@@ -10,8 +10,10 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-Route::post('/save/{type}', 'TaskController@saveTasks')->name('saveTasks');
-Route::get('/', 'TaskController@show')->name('show');
+
 Auth::routes();
+
+Route::post('/save/{type}', 'TaskController@saveTasks')->name('saveTasks')->middleware('auth');
+Route::get('/', 'TaskController@show')->name('show')->middleware('auth');
 
 Route::get('/home', 'HomeController@index');
