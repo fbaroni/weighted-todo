@@ -10,5 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+Auth::routes();
 Route::post('/save/{type}', 'TaskController@saveTasks')->name('saveTasks');
 Route::get('/', 'TaskController@show')->name('show');
