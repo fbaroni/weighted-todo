@@ -3,8 +3,17 @@
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1">
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            <input type="date" name="date" class="form-control"/></td>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <h4><a href="{{ action('TaskController@show', ['date' => $yesterday]) }}">Yesterday</a></h4>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <h4><a href="{{ action('TaskController@show', ['date' => $today]) }}">Today</a></h4>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <h4><a href="{{ action('TaskController@show', ['date' => $tomorrow]) }}">Tomorrow</a></h4>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <h4>{{ $date->format('d/m/Y') }}</h4>
         </div>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1">
@@ -26,7 +35,7 @@
                                         {{ round($valuation, 2) }}&nbsp; %</h1>
             </div>
         </div>
-        <form action="{{ action('TaskController@saveTasks', array('type' => 'day') ) }}" method="post">
+        <form action="{{ action('TaskController@saveTasks', ['type' => 'day', 'date' => $date->format('Ymd')] ) }}" method="post">
             <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <table class="table">
@@ -88,7 +97,7 @@
                                         {{ round($weekValuation, 2) }}&nbsp; %</h1>
             </div>
         </div>
-        <form action="{{ action('TaskController@saveTasks', array('type' => 'week') ) }}" method="post">
+        <form action="{{ action('TaskController@saveTasks', ['type' => 'week', 'date' => $date->format('Ymd')] ) }}" method="post">
             <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <table class="table">
@@ -146,7 +155,7 @@
                                     @endif
                                     {{ round($monthValuation, 2) }}&nbsp; %</h1>
         </div>
-        <form action="{{ action('TaskController@saveTasks', array('type' => 'month') ) }}" method="post">
+        <form action="{{ action('TaskController@saveTasks', ['type' => 'month', 'date' => $date->format('Ymd')] ) }}" method="post">
             <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <table class="table">

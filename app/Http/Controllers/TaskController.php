@@ -18,7 +18,6 @@ class TaskController extends Controller
         $monthlyTasks = $this->getMonthlyTasks($dateTime);
         $tasks = $this->getTasks($dateTime);
 
-
         return view('tasks',
             [
                 'tasks' => $tasks,
@@ -27,24 +26,50 @@ class TaskController extends Controller
                 'valuation' => ValuationService::getValuation($tasks),
                 'weekValuation' => ValuationService::getValuation($weeklyTasks),
                 'monthValuation' => ValuationService::getValuation($monthlyTasks),
+                'tomorrow' => $this->getTomorrowDate(),
+                'yesterday' => $this->getYesterdayDate(),
+                'today' => $this->getTodayDate(),
+                'date' => $dateTime
             ]);
     }
 
-    public function saveTasks(Request $request, $type)
+    private function getYesterdayDate()
     {
+        $today = new \DateTime('yesterday');
+
+        return $today->format('Ymd');
+    }
+
+    private function getTomorrowDate()
+    {
+        $today = new \DateTime('tomorrow');
+
+        return $today->format('Ymd');
+    }
+    private function getTodayDate()
+    {
+        $today = new \DateTime('now');
+
+        return $today->format('Ymd');
+    }
+
+    public function saveTasks(Request $request, $type, $dateTimeString)
+    {
+        $dateTime = \DateTime::createFromFormat('Ymd', $dateTimeString);
+
         if ($request->isMethod('POST')) {
             foreach ($request->request->get('tasks') as $index => $requestTask) {
                 if ($requestTask['priority'] == '') {
                     continue;
                 }
-                $this->saveTask($requestTask, $index, $type);
+                $this->saveTask($requestTask, $index, $type, $dateTime);
             }
 
             return redirect()->route('show');
         }
     }
 
-    private function saveTask($requestTask, $indexTask, $type)
+    private function saveTask($requestTask, $indexTask, $type, \DateTime $dateTime)
     {
         $task = '';
         switch($type){
@@ -69,17 +94,16 @@ class TaskController extends Controller
         $task->progress = $requestTask['progress'] != ''? $requestTask['progress']  : 0.0;
         $task->name = $requestTask['name'];
 //        $task->description = $requestTask['description'];
-        $dateTimeNow = new \DateTime('now');
 
         switch($type){
             case 'day':
-                $task->date = $dateTimeNow;
+                $task->date = $dateTime;
                 break;
             case 'week':
-                $task->week = $dateTimeNow->format("W");
+                $task->week = $dateTime->format("W");
                 break;
             case 'month':
-                $task->month = $dateTimeNow->format("m");
+                $task->month = $dateTime->format("m");
                 break;
         }
 

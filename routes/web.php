@@ -12,5 +12,5 @@
 */
 
 Auth::routes();
-Route::post('/save/{type}', 'TaskController@saveTasks')->name('saveTasks')->middleware('auth');
+Route::post('/save/{type}/{date}', 'TaskController@saveTasks')->name('saveTasks')->middleware('auth');
 Route::get('/', 'TaskController@show')->name('show')->middleware('auth');
