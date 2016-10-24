@@ -49,7 +49,6 @@
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
-                                {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -112,7 +111,6 @@
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
-                                {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -171,7 +169,11 @@
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
+<<<<<<< HEAD
                                 {{--value="{{ $task->description }}"/></td>--}}
+=======
+                                           {{--value="{{ $task->description }}"/></td>--}}
+>>>>>>> ed190f2295a44fced5e030ac0ca9dd9f9223428f
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
