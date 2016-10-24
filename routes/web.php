@@ -13,4 +13,5 @@
 
 Auth::routes();
 Route::post('/save/{type}/{date}', 'TaskController@saveTasks')->name('saveTasks')->middleware('auth');
+Route::get('/remove/{id}/{type}', 'TaskController@remove')->name('show')->middleware('auth');
 Route::get('/', 'TaskController@show')->name('show')->middleware('auth');

@@ -4,13 +4,13 @@
         <div class="col-lg-1 col-md-1 col-sm-1">
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1">
-            <h4><a href="{{ action('TaskController@show', ['date' => $yesterday]) }}">Yesterday</a></h4>
+            <h4><a href="{{ action('TaskController@show', ['date' => $yesterday]) }}" class="btn btn-info" role="button">Yesterday</a></h4>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1">
-            <h4><a href="{{ action('TaskController@show', ['date' => $today]) }}">Today</a></h4>
+            <h4><a href="{{ action('TaskController@show', ['date' => $today]) }}" class="btn btn-info" role="button">Today</a></h4>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1">
-            <h4><a href="{{ action('TaskController@show', ['date' => $tomorrow]) }}">Tomorrow</a></h4>
+            <h4><a href="{{ action('TaskController@show', ['date' => $tomorrow]) }}" class="btn btn-info" role="button">Tomorrow</a></h4>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1">
             <h4>{{ $date->format('d/m/Y') }}</h4>
@@ -27,12 +27,12 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 @if($valuation > 60.0)
                     <h1 class="text-success">
-                        @elseif($valuation > 35.0)
-                            <h1 class="text-warning">
-                                @else
-                                    <h1 class="text-danger">
-                                        @endif
-                                        {{ round($valuation, 2) }}&nbsp; %</h1>
+                @elseif($valuation > 35.0)
+                    <h1 class="text-warning">
+                @else
+                    <h1 class="text-danger">
+                @endif
+                {{ round($valuation, 2) }}&nbsp; %</h1>
             </div>
         </div>
         <form action="{{ action('TaskController@saveTasks', ['type' => 'day', 'date' => $date->format('Ymd')] ) }}" method="post">
@@ -49,6 +49,7 @@
                         <th class="col-lg-1 col-md-1 col-sm-1">
                             Progress
                         </th>
+                        <th  class="col-lg-1 col-md-1 col-sm-1"></th>
                         </thead>
                         <tbody>
                         @foreach ($tasks as $task)
@@ -60,6 +61,7 @@
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
+                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'day']) }}" class="btn btn-danger">Remove</a></td>
                             </tr>
                         @endforeach
                         <tr>
@@ -111,6 +113,7 @@
                         <th class="col-lg-1 col-md-1 col-sm-1">
                             Progress
                         </th>
+                        <th  class="col-lg-1 col-md-1 col-sm-1"></th>
                         </thead>
                         <tbody>
                         @foreach ($weeklyTasks as $task)
@@ -122,6 +125,8 @@
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
+                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'week']) }}" class="btn btn-danger">Remove</a></td>
+
                             </tr>
                         @endforeach
                         <tr>
@@ -169,6 +174,7 @@
                         <th class="col-lg-1 col-md-1 col-sm-1">
                             Progress
                         </th>
+                        <th  class="col-lg-1 col-md-1 col-sm-1"></th>
                         </thead>
                         <tbody>
                         @foreach ($monthlyTasks as $task)
@@ -180,6 +186,8 @@
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
+                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'month']) }}" class="btn btn-danger">Remove</a></td>
+
                             </tr>
                         @endforeach
                         <tr>

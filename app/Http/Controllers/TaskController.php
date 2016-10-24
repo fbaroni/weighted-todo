@@ -46,6 +46,7 @@ class TaskController extends Controller
 
         return $today->format('Ymd');
     }
+
     private function getTodayDate()
     {
         $today = new \DateTime('now');
@@ -69,10 +70,30 @@ class TaskController extends Controller
         }
     }
 
+
+    public function remove($idTask, $type)
+    {
+        switch ($type) {
+            case 'day':
+                $task = Task::find($idTask);
+                break;
+            case 'week':
+                $task =WeeklyTask::find($idTask);
+                break;
+            case 'month':
+                $task = MonthlyTask::find($idTask);
+                break;
+        }
+
+        $task->forceDelete();
+
+        return redirect()->route('show');
+    }
+
     private function saveTask($requestTask, $indexTask, $type, \DateTime $dateTime)
     {
         $task = '';
-        switch($type){
+        switch ($type) {
             case 'day':
                 $task = $indexTask == 'new' ? new Task() : Task::find($indexTask);
                 break;
@@ -90,12 +111,12 @@ class TaskController extends Controller
             throw new \Exception('no se creó la tarea');
 
         }
-        $task->priority = $requestTask['priority'] != ''? $requestTask['priority']  : 0;
-        $task->progress = $requestTask['progress'] != ''? $requestTask['progress']  : 0.0;
+        $task->priority = $requestTask['priority'] != '' ? $requestTask['priority'] : 0;
+        $task->progress = $requestTask['progress'] != '' ? $requestTask['progress'] : 0.0;
         $task->name = $requestTask['name'];
 //        $task->description = $requestTask['description'];
 
-        switch($type){
+        switch ($type) {
             case 'day':
                 $task->date = $dateTime;
                 break;
