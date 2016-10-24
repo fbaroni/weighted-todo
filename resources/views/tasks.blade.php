@@ -2,8 +2,6 @@
 @section('content')
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1">
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1">
             <h4><a href="{{ action('TaskController@show', ['date' => $yesterday]) }}" class="btn btn-info" role="button">Yesterday</a></h4>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1">
@@ -15,8 +13,6 @@
         <div class="col-lg-1 col-md-1 col-sm-1">
             <h4>{{ $date->format('d/m/Y') }}</h4>
         </div>
-    </div>
-    <div class="col-lg-1 col-md-1 col-sm-1">
     </div>
     <div class="col-lg-5 col-md-6 col-sm-12">
 
@@ -43,7 +39,7 @@
                         <th class="col-lg-1 col-md-1 col-sm-1">
                             Priority
                         </th>
-                        <th class="col-lg-4 col-md-5 col-sm-6">
+                        <th class="col-lg-5 col-md-6 col-sm-7">
                             Description
                         </th>
                         <th class="col-lg-1 col-md-1 col-sm-1">
@@ -107,7 +103,7 @@
                         <th class="col-lg-1 col-md-1 col-sm-1">
                             Priority
                         </th>
-                        <th class="col-lg-4 col-md-5 col-sm-6">
+                        <th class="col-lg-5 col-md-6 col-sm-7">
                             Description
                         </th>
                         <th class="col-lg-1 col-md-1 col-sm-1">
@@ -168,7 +164,7 @@
                         <th class="col-lg-1 col-md-1 col-sm-1">
                             Priority
                         </th>
-                        <th class="col-lg-4 col-md-5 col-sm-6">
+                        <th class="col-lg-5 col-md-6 col-sm-7">
                             Description
                         </th>
                         <th class="col-lg-1 col-md-1 col-sm-1">
