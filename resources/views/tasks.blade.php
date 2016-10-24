@@ -61,7 +61,7 @@
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
-                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'day']) }}" class="btn btn-danger">Remove</a></td>
+                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'day']) }}" class="btn btn-danger">X</a></td>
                             </tr>
                         @endforeach
                         <tr>
@@ -125,7 +125,7 @@
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
-                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'week']) }}" class="btn btn-danger">Remove</a></td>
+                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'week']) }}" class="btn btn-danger">X</a></td>
 
                             </tr>
                         @endforeach
@@ -186,7 +186,7 @@
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
-                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'month']) }}" class="btn btn-danger">Remove</a></td>
+                                <td><a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'month']) }}" class="btn btn-danger">X</a></td>
 
                             </tr>
                         @endforeach
