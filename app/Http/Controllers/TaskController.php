@@ -65,8 +65,8 @@ class TaskController extends Controller
             throw new \Exception('no se creó la tarea');
 
         }
-        $task->priority = $requestTask['priority'];
-        $task->progress = $requestTask['progress'];
+        $task->priority = $requestTask['priority'] != ''? $requestTask['priority']  : 0;
+        $task->progress = $requestTask['progress'] != ''? $requestTask['progress']  : 0.0;
         $task->name = $requestTask['name'];
 //        $task->description = $requestTask['description'];
         $dateTimeNow = new \DateTime('now');
