@@ -1,8 +1,15 @@
 @extends('base')
 @section('content')
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1">
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <input type="date" name="date" class="form-control"/></td>
+        </div>
+    </div>
     <div class="col-lg-1 col-md-1 col-sm-1">
     </div>
-    <div class="col-lg-8 col-md-10 col-sm-12">
+    <div class="col-lg-5 col-md-6 col-sm-12">
 
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2">
@@ -42,7 +49,7 @@
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
-                                           {{--value="{{ $task->description }}"/></td>--}}
+                                {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -65,6 +72,8 @@
             </div>
             {{ csrf_field() }}
         </form>
+    </div>
+    <div class="col-lg-5 col-md-6 col-sm-12">
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2">
                 <h2>Week</h2>
@@ -103,7 +112,7 @@
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
-                                           {{--value="{{ $task->description }}"/></td>--}}
+                                {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
@@ -162,7 +171,7 @@
                                 <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                            value="{{ $task->name }}"/></td>
                                 {{--<td><input type="text" name="tasks[{{ $task->id }}][description]" class="form-control"--}}
-                                           {{--value="{{ $task->description }}"/></td>--}}
+                                {{--value="{{ $task->description }}"/></td>--}}
                                 <td><input type="text" name="tasks[{{ $task->id }}][progress]" class="form-control"
                                            value="{{ $task->progress }}"/></td>
                             </tr>
