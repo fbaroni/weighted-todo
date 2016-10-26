@@ -12,7 +12,7 @@ class TaskController extends Controller
     public function show(Request $request)
     {
         $date = $request->get('date');
-        $dateTime = $date == '' ? (new \DateTime('now')) : (\DateTime::createFromFormat('Ymd', $date));
+        $dateTime = $date == '' ? (new \DateTime('now')) : ( $this->getDateTimeFromString($date));
 
         $weeklyTasks = $this->getWeeklyTasks($dateTime);
         $monthlyTasks = $this->getMonthlyTasks($dateTime);
@@ -56,7 +56,7 @@ class TaskController extends Controller
 
     public function saveTasks(Request $request, $type, $dateTimeString)
     {
-        $dateTime = \DateTime::createFromFormat('Ymd', $dateTimeString);
+        $dateTime = $this->getDateTimeFromString($dateTimeString);
 
         if ($request->isMethod('POST')) {
             foreach ($request->request->get('tasks') as $index => $requestTask) {
@@ -73,38 +73,28 @@ class TaskController extends Controller
 
     public function remove($idTask, $type)
     {
-        switch ($type) {
-            case 'day':
-                $task = Task::find($idTask);
-                break;
-            case 'week':
-                $task = WeeklyTask::find($idTask);
-                break;
-            case 'month':
-                $task = MonthlyTask::find($idTask);
-                break;
-        }
+        $task = $this->getTaskByType($idTask, $type);
 
         $task->forceDelete();
 
         return redirect()->route('show');
     }
 
-    private function saveTask($requestTask, $indexTask, $type, \DateTime $dateTime)
+    public function postpone($idTask, $type, $dateTimeString)
     {
-        $task = '';
-        switch ($type) {
-            case 'day':
-                $task = $indexTask == 'new' ? new Task() : Task::find($indexTask);
-                break;
-            case 'week':
-                $task = $indexTask == 'new' ? new WeeklyTask() : WeeklyTask::find($indexTask);
-                break;
-            case 'month':
-                $task = $indexTask == 'new' ? new MonthlyTask() : MonthlyTask::find($indexTask);
-                break;
+        $dateTime = $this->getDateTimeFromString($dateTimeString);
 
-        }
+        $task = $this->getTaskByType($idTask, $type);
+
+        $task->forceDelete();
+
+        return redirect()->route('show');
+    }
+
+    private function saveTask($requestTask, $idTask, $type, \DateTime $dateTime)
+    {
+        $task = false;
+        $task = $this->getTaskByType($idTask, $type);
 
         if (!$task) {
             //TODO throw new AppException
@@ -158,5 +148,36 @@ class TaskController extends Controller
         return Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
             ->orderBy('priority', 'asc')
             ->get();
+    }
+
+    /**
+     * @param $idTask
+     * @param $type
+     * @return mixed
+     */
+    public function getTaskByType($idTask, $type)
+    {
+        switch ($type) {
+            case 'day':
+                $task = Task::find($idTask);
+                break;
+            case 'week':
+                $task = WeeklyTask::find($idTask);
+                break;
+            case 'month':
+                $task = MonthlyTask::find($idTask);
+                break;
+        }
+        return $task;
+    }
+
+    /**
+     * @param $dateTimeString
+     * @return \DateTime
+     */
+    public function getDateTimeFromString($dateTimeString)
+    {
+        $dateTime = \DateTime::createFromFormat('Ymd', $dateTimeString);
+        return $dateTime;
     }
 }
