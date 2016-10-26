@@ -12,7 +12,7 @@ class TaskController extends Controller
     public function show(Request $request)
     {
         $date = $request->get('date');
-        $dateTime = $date == '' ? (new \DateTime('now')) : ( $this->getDateTimeFromString($date));
+        $dateTime = $date == '' ? (new \DateTime('now')) : ($this->getDateTimeFromString($date));
 
         $weeklyTasks = $this->getWeeklyTasks($dateTime);
         $monthlyTasks = $this->getMonthlyTasks($dateTime);
@@ -93,14 +93,13 @@ class TaskController extends Controller
 
     private function saveTask($requestTask, $idTask, $type, \DateTime $dateTime)
     {
-        $task = false;
+
         $task = $this->getTaskByType($idTask, $type);
 
         if (!$task) {
-            //TODO throw new AppException
-            throw new \Exception('no se creó la tarea');
-
+            return false;
         }
+
         $task->priority = $requestTask['priority'] != '' ? $requestTask['priority'] : 0;
         $task->progress = $requestTask['progress'] != '' ? $requestTask['progress'] : 0.0;
         $task->name = $requestTask['name'];
@@ -157,17 +156,34 @@ class TaskController extends Controller
      */
     public function getTaskByType($idTask, $type)
     {
-        switch ($type) {
-            case 'day':
-                $task = Task::find($idTask);
-                break;
-            case 'week':
-                $task = WeeklyTask::find($idTask);
-                break;
-            case 'month':
-                $task = MonthlyTask::find($idTask);
-                break;
+        $task = false;
+
+        if ($idTask == 'new') {
+            switch ($type) {
+                case 'day':
+                    $task = new Task();
+                    break;
+                case 'week':
+                    $task = new WeeklyTask();
+                    break;
+                case 'month':
+                    $task = new MonthlyTask();
+                    break;
+            }
+        } else {
+            switch ($type) {
+                case 'day':
+                    $task = Task::find($idTask);
+                    break;
+                case 'week':
+                    $task = WeeklyTask::find($idTask);
+                    break;
+                case 'month':
+                    $task = MonthlyTask::find($idTask);
+                    break;
+            }
         }
+
         return $task;
     }
 
