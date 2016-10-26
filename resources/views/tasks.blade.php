@@ -14,7 +14,7 @@
             <h4>{{ $date->format('d/m/Y') }}</h4>
         </div>
     </div>
-    <div class="col-lg-5 col-md-6 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
 
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2">
@@ -79,7 +79,7 @@
             {{ csrf_field() }}
         </form>
     </div>
-    <div class="col-lg-5 col-md-6 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2">
                 <h2>Week</h2>
