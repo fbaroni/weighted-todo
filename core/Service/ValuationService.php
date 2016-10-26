@@ -19,6 +19,9 @@ class ValuationService
             $totalDonePoundered += self::getPounderedProgress($task, $totalItems);
         }
 
+        if($totalDonePoundered == 0.0 || $totalPoundered == 0.0){
+            return 0.0;
+        }
         return ($totalDonePoundered / $totalPoundered) * 100.0;
     }
 
