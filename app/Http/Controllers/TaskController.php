@@ -66,7 +66,7 @@ class TaskController extends Controller
                 $this->saveTask($requestTask, $index, $type, $dateTime);
             }
 
-            return redirect()->route('show');
+            return redirect()->route('show', ['date' => $dateTimeString]);
         }
     }
 
@@ -78,7 +78,7 @@ class TaskController extends Controller
                 $task = Task::find($idTask);
                 break;
             case 'week':
-                $task =WeeklyTask::find($idTask);
+                $task = WeeklyTask::find($idTask);
                 break;
             case 'month':
                 $task = MonthlyTask::find($idTask);
