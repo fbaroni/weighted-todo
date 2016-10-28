@@ -11,6 +11,11 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <style>
+        .half-col{
+            width: 1.4%;
+        }
+    </style>
 </head>
 <body>
 <!--[if lt IE 8]>
