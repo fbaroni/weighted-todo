@@ -15,6 +15,10 @@
         .half-col{
             width: 1.4%;
         }
+        .medium-col{
+             width: 3.5%;
+         }
+
     </style>
 </head>
 <body>

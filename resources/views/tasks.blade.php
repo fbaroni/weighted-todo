@@ -40,7 +40,7 @@
                         <th class="half-col">
                             Priority
                         </th>
-                        <th class="half-col">
+                        <th class="medium-col">
                             Progress
                         </th>
                         <th class="col-lg-5 col-md-6 col-sm-7">
@@ -127,7 +127,7 @@
                         <th class="half-col">
                             Priority
                         </th>
-                        <th class="half-col">
+                        <th class="medium-col">
                             Progress
                         </th>
                         <th class="col-lg-5 col-md-6 col-sm-7">
@@ -211,7 +211,7 @@
                         <th class="half-col">
                             Priority
                         </th>
-                        <th class="half-col">
+                        <th class="medium-col">
                             Progress
                         </th>
                         <th class="col-lg-5 col-md-6 col-sm-7">
