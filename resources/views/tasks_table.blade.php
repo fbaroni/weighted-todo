@@ -22,7 +22,7 @@
                         <select name="tasks[{{ $task->id }}][progress]" class="form-control">
                             <option value="0.0" {{ $task->progress == 0.0? 'selected' : '' }}>0 %
                             </option>
-                            <option value="0.5" {{ $task->progress == 0.5? 'selected' : '' }}>50 %
+                            <option value="0.33" {{ $task->progress == 0.33? 'selected' : '' }}>33 %
                             </option>
                             <option value="1.0" {{ $task->progress == 1.0? 'selected' : '' }}>100 %
                             </option>
@@ -41,7 +41,7 @@
                     <select name="tasks[new][progress]" class="form-control">
                         <option value="0.0">0 %
                         </option>
-                        <option value="0.5">50 %
+                        <option value="0.33">33 %
                         </option>
                         <option value="1.0">100 %
                         </option>
