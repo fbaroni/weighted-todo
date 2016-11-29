@@ -19,7 +19,7 @@
 
         <form action="{{ action('TaskController@saveTasks', ['type' => 'day', 'date' => $date->format('Ymd')] ) }}"
               method="post">
-            @include('tasks_table', ['tasks' => $tasks ])
+            @include('tasks_table', ['tasks' => $tasks, 'type' => 'day'  ])
             {{ csrf_field() }}
         </form>
     </div>
@@ -28,14 +28,14 @@
 
         <form action="{{ action('TaskController@saveTasks', ['type' => 'week', 'date' => $date->format('Ymd')] ) }}"
               method="post">
-            @include('tasks_table', ['tasks' => $weeklyTasks ])
+            @include('tasks_table', ['tasks' => $weeklyTasks, 'type' => 'week'  ])
             {{ csrf_field() }}
         </form>
         @include('task_value', ['title' => 'Month', 'valuation' => $monthValuation ])
 
         <form action="{{ action('TaskController@saveTasks', ['type' => 'month', 'date' => $date->format('Ymd')] ) }}"
               method="post">
-            @include('tasks_table', ['tasks' => $monthlyTasks ])
+            @include('tasks_table', ['tasks' => $monthlyTasks, 'type' => 'month' ])
             {{ csrf_field() }}
         </form>
     </div>

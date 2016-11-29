@@ -2,16 +2,16 @@
     <div class="col-lg-11 col-md-11 col-sm-11">
         <table class="table">
             <thead class="thead-default">
-                <th class="half-col">
-                    Priority
-                </th>
-                <th class="medium-col">
-                    Progress
-                </th>
-                <th class="col-lg-5 col-md-6 col-sm-7">
-                    Description
-                </th>
-                <th class="col-lg-1 col-md-1 col-sm-1"></th>
+            <th class="half-col">
+                Priority
+            </th>
+            <th class="medium-col">
+                Progress
+            </th>
+            <th class="col-lg-5 col-md-6 col-sm-7">
+                Description
+            </th>
+            <th class="col-lg-1 col-md-1 col-sm-1"></th>
             </thead>
             <tbody>
             @foreach ($tasks as $task)
@@ -31,7 +31,7 @@
                     <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                value="{{ $task->name }}"/></td>
                     <td>
-                        <a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => 'day']) }}"
+                        <a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => $type]) }}"
                            class="btn btn-danger">X</a></td>
                 </tr>
             @endforeach
