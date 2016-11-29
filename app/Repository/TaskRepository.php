@@ -9,7 +9,12 @@ class TaskRepository
 {
     public function getMonthlyTasks(\DateTime $dateTime)
     {
-        $monthNumber = $dateTime->format("m");
+        $monthNumber = intval($dateTime->format("m"));
+        $yearNumber = intval($dateTime->format("Y"));
+
+        $postponedMonthTasks = $this->getOneDifferenceMonth($monthNumber, $yearNumber, 'restar');
+        //TODO check postponed and save like current if not in 100 %
+        //has the problem of deleting
 
         $currentMonthTasks = MonthlyTask::where('month', intval($monthNumber))
             ->orderBy('priority', 'asc')
@@ -34,6 +39,70 @@ class TaskRepository
         return Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
             ->orderBy('priority', 'asc')
             ->get();
+    }
+
+    private function getMonthlyTasksByMonthYear($month, $year)
+    {
+        return MonthlyTask::where('month', $month)
+            ->where('year', $year)
+            ->orderBy('priority', 'asc')
+            ->get();
+    }
+
+    private function getWeeklyTasksByWeekYear($week, $year)
+    {
+        return WeeklyTask::where('week', $week)
+            ->where('year', $year)
+            ->orderBy('priority', 'asc')
+            ->get();
+    }
+
+    private function checkAndSaveLastToCurrent($tasks)
+    {
+
+    }
+
+
+    private function getOneDifferenceWeek($week, $year, $operation)
+    {
+        if ($operation == 'restar') {
+            --$week;
+        } else {
+            ++$week;
+        }
+
+        if ($week == 0) {
+            $week = 52;
+            --$year;
+        }
+
+        if ($week == 53) {
+            $week = 1;
+            ++$year;
+        }
+
+        return ['week' => $week, 'year' => $year];
+    }
+
+    private function getOneDifferenceMonth($month, $year, $operation)
+    {
+        if ($operation == 'restar') {
+            --$month;
+        } else {
+            ++$month;
+        }
+
+        if ($month == 0) {
+            $month = 12;
+            --$year;
+        }
+
+        if ($month == 13) {
+            $month = 1;
+            ++$year;
+        }
+
+        return ['month' => $month, 'year' => $year];
     }
 
 
