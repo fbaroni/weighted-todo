@@ -33,7 +33,11 @@ class TaskRepository
             ->orderBy('priority', 'asc')
             ->get();
 
-        return ['tasks' => $currentMonthTasks, 'valuation' => $this->getValuationService()->getValuation($currentMonthTasks)];
+        return [
+            'tasks' => $currentMonthTasks,
+            'valuation' => $this->getValuationService()->getValuation($currentMonthTasks),
+            'title' => $this->getMainTask($currentMonthTasks)
+        ];
     }
 
     public
@@ -41,22 +45,30 @@ class TaskRepository
     {
         $weekNumber = $dateTime->format("W");
 
-        $weeklyTasks =  WeeklyTask::where('week', intval($weekNumber))
+        $weeklyTasks = WeeklyTask::where('week', intval($weekNumber))
             ->orderBy('priority', 'asc')
             ->get();
 
-        return ['tasks' => $weeklyTasks, 'valuation' => $this->getValuationService()->getValuation($weeklyTasks)];
+        return [
+            'tasks' => $weeklyTasks,
+            'valuation' => $this->getValuationService()->getValuation($weeklyTasks),
+            'title' => $this->getMainTask($weeklyTasks)
+        ];
 
     }
 
     public
     function getTasks(\DateTime $dateTime)
     {
-        $dailyTasks =  Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
+        $dailyTasks = Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
             ->orderBy('priority', 'asc')
             ->get();
 
-        return ['tasks' => $dailyTasks, 'valuation' => $this->getValuationService()->getValuation($dailyTasks)];
+        return [
+            'tasks' => $dailyTasks,
+            'valuation' => $this->getValuationService()->getValuation($dailyTasks),
+            'title' => $this->getMainTask($dailyTasks)
+        ];
     }
 
     private function getMonthlyTasksByMonthYear($month, $year)
@@ -126,7 +138,6 @@ class TaskRepository
 
     public function saveTask($requestTask, $idTask, $type, \DateTime $dateTime)
     {
-
         $task = $this->getTaskByType($idTask, $type);
 
         if (!$task) {
@@ -137,19 +148,34 @@ class TaskRepository
         $task->progress = $requestTask['progress'] != '' ? $requestTask['progress'] : 0.0;
         $task->name = $requestTask['name'];
 
+
         switch ($type) {
             case 'day':
                 $task->date = $dateTime;
                 break;
             case 'week':
                 $task->week = $dateTime->format("W");
+                $task->year = $dateTime->format("Y");
                 break;
             case 'month':
                 $task->month = $dateTime->format("m");
+                $task->year = $dateTime->format("Y");
+
                 break;
         }
 
         return $task->save();
+    }
+
+    private function getMainTask($taskList)
+    {
+        foreach($taskList as $task){
+            if($task->priority == '1'){
+                return $task->name;
+            }
+        }
+
+        return '';
     }
 
     public function removeTask($idTask, $type)

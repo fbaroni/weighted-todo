@@ -20,17 +20,18 @@ class TaskController extends Controller
     public function show(Request $request)
     {
         $date = $request->get('date');
-        $dateTime = $date == '' ? (new \DateTime('now')) : ($this->getDateTimeFromString($date));
 
-        $weeklyTasks = $this->getRepository()->getWeeklyTasks($dateTime);
-        $monthlyTasks = $this->getRepository()->getMonthlyTasks($dateTime);
-        $tasks = $this->getRepository()->getTasks($dateTime);
+        $dateTime =
+            $date == '' ?
+            (new \DateTime('now')) :
+            ($this->getDateTimeFromString($date))
+        ;
 
         return view('tasks',
             [
-                'tasks' => $tasks,
-                'weeklyTasks' => $weeklyTasks,
-                'monthlyTasks' => $monthlyTasks,
+                'tasks' => $this->getRepository()->getTasks($dateTime),
+                'weeklyTasks' => $this->getRepository()->getWeeklyTasks($dateTime),
+                'monthlyTasks' => $this->getRepository()->getMonthlyTasks($dateTime),
                 'tomorrow' => $this->getTomorrowDate(),
                 'yesterday' => $this->getYesterdayDate(),
                 'today' => $this->getTodayDate(),
