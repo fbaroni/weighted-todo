@@ -11,24 +11,48 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
-        .half-col{
+        .half-col {
             width: 1.4%;
         }
-        .medium-col{
-             width: 3.5%;
-         }
 
+        .medium-col {
+            width: 3.5%;
+        }
+
+        .body {
+            background: url('{{ asset('img/t.jpg') }}');
+            color: white;
+        }
+
+        input[type="text"], select
+        {
+            font-size: 14pt;
+            color:white;
+            background-color:rgba(0,0,0,0) !important;
+            border:none !important;
+        }
+        select option {
+            background: transparent !important;
+            /*background: rgba(0,0,0,0);*/
+            color:black;
+            text-shadow:0 1px 0 rgba(0,0,0,0.4);
+        }
+        select {
+            color: white !important;
+            background: transparent !important;
+        }
     </style>
 </head>
-<body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-@yield('content')
+<body class="body">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+        your browser</a> to improve your experience.</p>
+    <![endif]-->
+    @yield('content')
 
-<script src="{{ asset('js/vendor/jquery-1.12.0.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery-1.12.0.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
 </body>
 </html>

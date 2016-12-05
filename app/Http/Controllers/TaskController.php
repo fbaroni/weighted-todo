@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Repository\TaskRepository;
-use Domain\Service\ValuationService;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -14,6 +13,10 @@ class TaskController extends Controller
         $this->repository = $repository;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request)
     {
         $date = $request->get('date');
@@ -35,6 +38,12 @@ class TaskController extends Controller
             ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $type
+     * @param $dateTimeString
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveTasks(Request $request, $type, $dateTimeString)
     {
         $dateTime = $this->getDateTimeFromString($dateTimeString);
@@ -51,6 +60,12 @@ class TaskController extends Controller
         }
     }
 
+    /**
+     * @param $idTask
+     * @param $type
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function remove($idTask, $type)
     {
         if (!$this->getRepository()->removeTask($idTask, $type)) {
@@ -61,6 +76,9 @@ class TaskController extends Controller
     }
 
 
+    /**
+     * @return string
+     */
     private function getYesterdayDate()
     {
         $today = new \DateTime('yesterday');
@@ -75,6 +93,9 @@ class TaskController extends Controller
         return $today->format('Ymd');
     }
 
+    /**
+     * @return string
+     */
     private function getTodayDate()
     {
         $today = new \DateTime('now');
