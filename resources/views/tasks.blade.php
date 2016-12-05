@@ -15,27 +15,27 @@
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12">
-        @include('task_value', ['title' => $date->format('d/m/Y'), 'valuation' => $valuation ])
+        @include('task_value', ['title' => $date->format('d/m/Y'), 'valuation' => $tasks['valuation'] ])
 
         <form action="{{ action('TaskController@saveTasks', ['type' => 'day', 'date' => $date->format('Ymd')] ) }}"
               method="post">
-            @include('tasks_table', ['tasks' => $tasks, 'type' => 'day'  ])
+            @include('tasks_table', ['tasks' => $tasks['tasks'], 'type' => 'day'  ])
             {{ csrf_field() }}
         </form>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12">
-        @include('task_value', ['title' => 'Week', 'valuation' => $weekValuation ])
+        @include('task_value', ['title' => 'Week', 'valuation' => $weeklyTasks['valuation'] ])
 
         <form action="{{ action('TaskController@saveTasks', ['type' => 'week', 'date' => $date->format('Ymd')] ) }}"
               method="post">
-            @include('tasks_table', ['tasks' => $weeklyTasks, 'type' => 'week'  ])
+            @include('tasks_table', ['tasks' => $weeklyTasks['tasks'], 'type' => 'week'  ])
             {{ csrf_field() }}
         </form>
-        @include('task_value', ['title' => 'Month', 'valuation' => $monthValuation ])
+        @include('task_value', ['title' => 'Month', 'valuation' => $monthlyTasks['valuation'] ])
 
         <form action="{{ action('TaskController@saveTasks', ['type' => 'month', 'date' => $date->format('Ymd')] ) }}"
               method="post">
-            @include('tasks_table', ['tasks' => $monthlyTasks, 'type' => 'month' ])
+            @include('tasks_table', ['tasks' => $monthlyTasks['tasks'], 'type' => 'month' ])
             {{ csrf_field() }}
         </form>
     </div>

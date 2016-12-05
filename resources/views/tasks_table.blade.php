@@ -14,6 +14,9 @@
             <th class="col-lg-1 col-md-1 col-sm-1"></th>
             </thead>
             <tbody>
+            <tr>
+                <h4></h4>
+            </tr>
             @foreach ($tasks as $task)
                 <tr>
                     <td><input type="text" name="tasks[{{ $task->id }}][priority]"

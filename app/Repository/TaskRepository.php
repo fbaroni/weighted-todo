@@ -4,9 +4,22 @@ namespace App\Repository;
 use App\Model\MonthlyTask;
 use App\Model\Task;
 use App\Model\WeeklyTask;
+use Domain\Service\ValuationService;
 
 class TaskRepository
 {
+    protected $valuationService;
+
+    /**
+     * TaskRepository constructor.
+     * @param ValuationService $valuationService
+     */
+    public function __construct(ValuationService $valuationService)
+    {
+        $this->valuationService = $valuationService;
+    }
+
+
     public function getMonthlyTasks(\DateTime $dateTime)
     {
         $monthNumber = intval($dateTime->format("m"));
@@ -20,7 +33,7 @@ class TaskRepository
             ->orderBy('priority', 'asc')
             ->get();
 
-        return $currentMonthTasks;
+        return ['tasks' => $currentMonthTasks, 'valuation' => $this->getValuationService()->getValuation($currentMonthTasks)];
     }
 
     public
@@ -28,17 +41,22 @@ class TaskRepository
     {
         $weekNumber = $dateTime->format("W");
 
-        return WeeklyTask::where('week', intval($weekNumber))
+        $weeklyTasks =  WeeklyTask::where('week', intval($weekNumber))
             ->orderBy('priority', 'asc')
             ->get();
+
+        return ['tasks' => $weeklyTasks, 'valuation' => $this->getValuationService()->getValuation($weeklyTasks)];
+
     }
 
     public
     function getTasks(\DateTime $dateTime)
     {
-        return Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
+        $dailyTasks =  Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
             ->orderBy('priority', 'asc')
             ->get();
+
+        return ['tasks' => $dailyTasks, 'valuation' => $this->getValuationService()->getValuation($dailyTasks)];
     }
 
     private function getMonthlyTasksByMonthYear($month, $year)
@@ -180,4 +198,11 @@ class TaskRepository
         return $task;
     }
 
+    /**
+     * @return ValuationService
+     */
+    public function getValuationService()
+    {
+        return $this->valuationService;
+    }
 }
