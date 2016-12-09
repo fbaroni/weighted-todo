@@ -22,7 +22,7 @@
         }
 
         .body {
-            background: url('{{ asset('img/t.jpg') }}');
+            background: url('https://drscdn.500px.org/photo/98384509/m%3D2048/eac292c7cd46de1b237d53618710c541');
             color: white;
         }
 
