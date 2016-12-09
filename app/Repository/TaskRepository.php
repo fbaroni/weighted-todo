@@ -8,14 +8,16 @@ use Domain\Service\ValuationService;
 
 class TaskRepository
 {
+    protected $valuationRepository;
     protected $valuationService;
 
     /**
      * TaskRepository constructor.
-     * @param ValuationService $valuationService
+     * @param ValuationRepository $valuationRepository
      */
-    public function __construct(ValuationService $valuationService)
+    public function __construct(ValuationRepository $valuationRepository, ValuationService $valuationService)
     {
+        $this->valuationRepository = $valuationRepository;
         $this->valuationService = $valuationService;
     }
 
@@ -35,7 +37,7 @@ class TaskRepository
 
         return [
             'tasks' => $currentMonthTasks,
-            'valuation' => $this->getValuationService()->getValuation($currentMonthTasks),
+            'valuation' => $this->getValuationRepository()->calculateMonthValuation($dateTime, $currentMonthTasks),
             'title' => $this->getMainTask($currentMonthTasks)
         ];
     }
@@ -222,6 +224,14 @@ class TaskRepository
         }
 
         return $task;
+    }
+
+    /**
+     * @return ValuationRepository
+     */
+    public function getValuationRepository()
+    {
+        return $this->valuationRepository;
     }
 
     /**
