@@ -27,7 +27,7 @@ class TaskRepository
         $monthNumber = intval($dateTime->format("m"));
         $yearNumber = intval($dateTime->format("Y"));
 
-        $postponedMonthTasks = $this->getOneDifferenceMonth($monthNumber, $yearNumber, 'restar');
+        $this->getOneDifferenceMonthlyTasks($monthNumber, $yearNumber, 'restar');
         //TODO check postponed and save like current if not in 100 %. has the problem of deleting
         //TODO in order to solve this we are "marking" if a task has been postponed. you can postpone one time only
 
@@ -116,6 +116,52 @@ class TaskRepository
         return ['week' => $week, 'year' => $year];
     }
 
+
+    private function getOneDifferenceMonthlyTasks($month, $year, $operation)
+    {
+        $yearMonth = $this->getOneDifferenceMonth($month, $year, $operation);
+
+        $notDoneMonthlyTasks = MonthlyTask::where('month', $yearMonth['month'])
+            ->where('year', $yearMonth['year'])
+            ->orderBy('priority', 'asc')
+            ->get();
+
+        foreach ($notDoneMonthlyTasks as $notDoneMontlyTask) {
+
+            if($notDoneMontlyTask->progress < 1.0) {
+                $task = new MonthlyTask();
+
+                foreach ($notDoneMontlyTask->getAttributes() as $key => $value) {
+
+                    if ($key == 'id') {
+                        continue;
+                    } elseif ($key == 'month'
+                    ) {
+                        $task->month = $month;
+                    } elseif ($key == 'year') {
+                        $task->year = $year;
+                    } else {
+                        $task->$key = $value;
+                    }
+                }
+                if($this->checkIfMonthlyTaskNotExist($task)){
+                    $task->save();
+                }
+            }
+        }
+    }
+
+    private function checkIfMonthlyTaskNotExist(MonthlyTask $task)
+    {
+        $tasks = MonthlyTask::where('month', $task->getMonth())
+            ->where('year', $task->year)
+            ->where('name', $task->name)
+            ->get();
+
+        return count($tasks) == 0;
+    }
+
+
     private function getOneDifferenceMonth($month, $year, $operation)
     {
         if ($operation == 'restar') {
@@ -171,8 +217,8 @@ class TaskRepository
 
     private function getMainTask($taskList)
     {
-        foreach($taskList as $task){
-            if($task->priority == '1'){
+        foreach ($taskList as $task) {
+            if ($task->priority == '1') {
                 return $task->name;
             }
         }
