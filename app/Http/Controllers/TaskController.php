@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Repository\DailyTaskRepository;
 use App\Repository\MonthlyTaskRepository;
 use App\Repository\TaskRepository;
 use App\Repository\WeeklyTaskRepository;
@@ -11,12 +12,15 @@ class TaskController extends Controller
     protected $repository;
     protected $monthlyTaskRepository;
     protected $weeklyTaskRepository;
+    protected $dailyTaskRepository;
 
-    public function __construct(TaskRepository $repository, MonthlyTaskRepository $monthlyTaskRepository, WeeklyTaskRepository $weeklyTaskRepository)
+    public function __construct(TaskRepository $repository, DailyTaskRepository $dailyTaskRepository,
+                                MonthlyTaskRepository $monthlyTaskRepository, WeeklyTaskRepository $weeklyTaskRepository)
     {
         $this->repository = $repository;
         $this->monthlyTaskRepository = $monthlyTaskRepository;
         $this->weeklyTaskRepository = $weeklyTaskRepository;
+        $this->dailyTaskRepository = $dailyTaskRepository;
     }
 
     /**
@@ -35,7 +39,7 @@ class TaskController extends Controller
 
         return view('tasks',
             [
-                'tasks' => $this->getRepository()->getTasks($dateTime),
+                'tasks' => $this->getDailyTaskRepository()->getDailyTasks($dateTime),
                 'weeklyTasks' => $this->getWeeklyTaskRepository()->getWeeklyTasks($dateTime),
                 'monthlyTasks' => $this->getMonthlyTaskRepository()->getMonthlyTasks($dateTime),
                 'tomorrow' => $this->getTomorrowDate(),
@@ -144,5 +148,11 @@ class TaskController extends Controller
         return $this->weeklyTaskRepository;
     }
 
-
+    /**
+     * @return DailyTaskRepository
+     */
+    public function getDailyTaskRepository()
+    {
+        return $this->dailyTaskRepository;
+    }
 }
