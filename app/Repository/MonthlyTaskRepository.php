@@ -18,6 +18,7 @@ class MonthlyTaskRepository extends TaskRepository
         //TODO in order to solve this we are "marking" if a task has been postponed. you can postpone one time only
 
         $currentMonthTasks = MonthlyTask::where('month', intval($monthNumber))
+            ->where('year', intval($yearNumber))
             ->orderBy('priority', 'asc')
             ->get();
 

@@ -1,16 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Repository\MonthlyTaskRepository;
 use App\Repository\TaskRepository;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     protected $repository;
+    protected $monthlyTaskRepository;
 
-    public function __construct(TaskRepository $repository)
+    public function __construct(TaskRepository $repository, MonthlyTaskRepository $monthlyTaskRepository)
     {
         $this->repository = $repository;
+        $this->monthlyTaskRepository = $monthlyTaskRepository;
     }
 
     /**
@@ -31,7 +34,7 @@ class TaskController extends Controller
             [
                 'tasks' => $this->getRepository()->getTasks($dateTime),
                 'weeklyTasks' => $this->getRepository()->getWeeklyTasks($dateTime),
-                'monthlyTasks' => $this->getRepository()->getMonthlyTasks($dateTime),
+                'monthlyTasks' => $this->getMonthlyTaskRepository()->getMonthlyTasks($dateTime),
                 'tomorrow' => $this->getTomorrowDate(),
                 'yesterday' => $this->getYesterdayDate(),
                 'today' => $this->getTodayDate(),
@@ -120,5 +123,13 @@ class TaskController extends Controller
     public function getRepository()
     {
         return $this->repository;
+    }
+
+    /**
+     * @return MonthlyTaskRepository
+     */
+    public function getMonthlyTaskRepository()
+    {
+        return $this->monthlyTaskRepository;
     }
 }
