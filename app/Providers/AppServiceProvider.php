@@ -27,6 +27,15 @@ class AppServiceProvider extends ServiceProvider
             'App\Repository\TaskRepository'
         );
         $this->app->bind(
+            'App\Repository\MonthlyTaskRepository'
+        );
+//        $this->app->bind(
+//            'App\Repository\TaskRepository'
+//        );
+//        $this->app->bind(
+//            'App\Repository\TaskRepository'
+//        );
+        $this->app->bind(
             'Domain\Service\ValuationService'
         );
     }
