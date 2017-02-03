@@ -33,9 +33,8 @@ class TaskController extends Controller
 
         $dateTime =
             $date == '' ?
-            (new \DateTime('now')) :
-            ($this->getDateTimeFromString($date))
-        ;
+                (new \DateTime('now')) :
+                ($this->getDateTimeFromString($date));
 
         return view('tasks',
             [
@@ -61,9 +60,11 @@ class TaskController extends Controller
 
         if ($request->isMethod('POST')) {
             foreach ($request->request->get('tasks') as $index => $requestTask) {
-                if ($requestTask['priority'] == '') {
+                if(empty($requestTask['name'])){
                     continue;
                 }
+
+                $requestTask['priority'] = $requestTask['priority'] ? $requestTask['priority'] : '5';
                 $this->getRepository()->saveTask($requestTask, $index, $type, $dateTime);
             }
 
