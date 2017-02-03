@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repository\MonthlyTaskRepository'
         );
-//        $this->app->bind(
-//            'App\Repository\TaskRepository'
-//        );
+        $this->app->bind(
+            'App\Repository\WeeklyTaskRepository'
+        );
 //        $this->app->bind(
 //            'App\Repository\TaskRepository'
 //        );

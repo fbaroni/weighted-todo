@@ -22,23 +22,6 @@ class TaskRepository
     }
 
     public
-    function getWeeklyTasks(\DateTime $dateTime)
-    {
-        $weekNumber = $dateTime->format("W");
-
-        $weeklyTasks = WeeklyTask::where('week', intval($weekNumber))
-            ->orderBy('priority', 'asc')
-            ->get();
-
-        return [
-            'tasks' => $weeklyTasks,
-            'valuation' => $this->getValuationService()->getValuation($weeklyTasks),
-            'title' => $this->getMainTask($weeklyTasks)
-        ];
-
-    }
-
-    public
     function getTasks(\DateTime $dateTime)
     {
         $dailyTasks = Task::whereDate('date', '=', $dateTime->format('Y-m-d'))
@@ -51,42 +34,11 @@ class TaskRepository
             'title' => $this->getMainTask($dailyTasks)
         ];
     }
-    protected function getWeeklyTasksByWeekYear($week, $year)
-    {
-        return WeeklyTask::where('week', $week)
-            ->where('year', $year)
-            ->orderBy('priority', 'asc')
-            ->get();
-    }
 
     protected function checkAndSaveLastToCurrent($tasks)
     {
 
     }
-
-
-    protected function getOneDifferenceWeek($week, $year, $operation)
-    {
-        if ($operation == 'restar') {
-            --$week;
-        } else {
-            ++$week;
-        }
-
-        if ($week == 0) {
-            $week = 52;
-            --$year;
-        }
-
-        if ($week == 53) {
-            $week = 1;
-            ++$year;
-        }
-
-        return ['week' => $week, 'year' => $year];
-    }
-
-
 
     public function saveTask($requestTask, $idTask, $type, \DateTime $dateTime)
     {
