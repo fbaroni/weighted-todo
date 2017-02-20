@@ -53,7 +53,9 @@ class WeeklyTaskRepository extends TaskRepository
                         $task->week = $week;
                     } elseif ($key == 'year') {
                         $task->year = $year;
-                    } else {
+                    } elseif ($key == 'progress') {
+                        $task->progress = 0.0;
+                    }else {
                         $task->$key = $value;
                     }
                 }

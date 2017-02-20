@@ -48,7 +48,7 @@ class MonthlyTaskRepository extends TaskRepository
 
         foreach ($notDoneMonthlyTasks as $notDoneMontlyTask) {
 
-            if($notDoneMontlyTask->progress < 1.0) {
+            if ($notDoneMontlyTask->progress < 1.0) {
                 $task = new MonthlyTask();
 
                 foreach ($notDoneMontlyTask->getAttributes() as $key => $value) {
@@ -60,11 +60,13 @@ class MonthlyTaskRepository extends TaskRepository
                         $task->month = $month;
                     } elseif ($key == 'year') {
                         $task->year = $year;
+                    } elseif ($key == 'progress') {
+                        $task->progress = 0.0;
                     } else {
                         $task->$key = $value;
                     }
                 }
-                if($this->checkIfMonthlyTaskNotExist($task)){
+                if ($this->checkIfMonthlyTaskNotExist($task)) {
                     $task->save();
                 }
             }

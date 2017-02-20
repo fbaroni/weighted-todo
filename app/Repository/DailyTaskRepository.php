@@ -40,9 +40,10 @@ class DailyTaskRepository extends TaskRepository
 
                     if ($key == 'id') {
                         continue;
-                    } elseif ($key == 'date'
-                    ) {
+                    } elseif ($key == 'date') {
                         $task->date = $datetime;
+                    } elseif ($key == 'progress') {
+                        $task->progress = 0.0;
                     } else {
                         $task->$key = $value;
                     }
@@ -56,7 +57,7 @@ class DailyTaskRepository extends TaskRepository
 
     private function checkIfDailyTaskNotExist(Task $task)
     {
-        $tasks =  Task::whereDate('date', '=', $task->date->format('Y-m-d'))
+        $tasks = Task::whereDate('date', '=', $task->date->format('Y-m-d'))
             ->orderBy('priority', 'asc')
             ->where('name', $task->name)
             ->get();
