@@ -30,7 +30,7 @@ class TaskController extends Controller
     public function show(Request $request)
     {
         $date = $request->get('date');
-
+	
         $dateTime =
             $date == '' ?
                 (new \DateTime('now')) :
