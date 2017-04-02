@@ -7,8 +7,6 @@ class DailyTaskRepository extends TaskRepository
 {
     public function getDailyTasks(\DateTime $dateTime)
     {
-        $this->getOneDifferenceDailyTasks($dateTime);
-
         $daylyTasks = $this->getDailyTasksByDate($dateTime);
 
         return [

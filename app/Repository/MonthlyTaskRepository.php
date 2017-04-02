@@ -13,10 +13,6 @@ class MonthlyTaskRepository extends TaskRepository
         $monthNumber = intval($dateTime->format("m"));
         $yearNumber = intval($dateTime->format("Y"));
 
-        $this->getOneDifferenceMonthlyTasks($monthNumber, $yearNumber, 'restar');
-        //TODO check postponed and save like current if not in 100 %. has the problem of deleting
-        //TODO in order to solve this we are "marking" if a task has been postponed. you can postpone one time only
-
         $currentMonthTasks = MonthlyTask::where('month', intval($monthNumber))
             ->where('year', intval($yearNumber))
             ->orderBy('priority', 'asc')

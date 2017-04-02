@@ -10,8 +10,6 @@ class WeeklyTaskRepository extends TaskRepository
         $weekNumber = intval($dateTime->format("W"));
         $yearNumber = intval($dateTime->format("Y"));
 
-        $this->getOneDifferenceWeeklyTasks($weekNumber, $yearNumber, 'restar');
-
         $weeklyTasks = $this->getWeeklyTasksByWeekYear($weekNumber, $yearNumber);
 
         return [
