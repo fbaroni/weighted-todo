@@ -4,13 +4,5 @@
             <h3>{{ $title }}</h3>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            @if($valuation > 60.0)
-                <h1 class="text-success">
-            @elseif($valuation > 35.0)
-                <h1 class="text-warning">
-            @else
-                <h1 class="text-danger">
-            @endif
-            {{ round($valuation, 2) }}&nbsp; %</h1>
         </div>
     </div>

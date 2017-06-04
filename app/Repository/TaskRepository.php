@@ -51,7 +51,8 @@ class TaskRepository
         $task->priority = $requestTask['priority'] != '' ? $requestTask['priority'] : 0;
         $task->progress = $requestTask['progress'] != '' ? $requestTask['progress'] : 0.0;
         $task->name = $requestTask['name'];
-
+        $task->important = $requestTask['important'];
+        $task->urgent = $requestTask['urgent'];
 
         switch ($type) {
             case 'day':

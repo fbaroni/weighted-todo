@@ -6,6 +6,12 @@
                 Priority
             </th>
             <th class="medium-col">
+                Important
+            </th>
+            <th class="medium-col">
+                Urgent
+            </th>
+            <th class="medium-col">
                 Progress
             </th>
             <th class="col-lg-5 col-md-6 col-sm-7">
@@ -21,6 +27,22 @@
                 <tr>
                     <td><input type="text" name="tasks[{{ $task->id }}][priority]"
                                value="{{ $task->priority }}" class="form-control"/></td>
+                    <td>
+                        <select name="tasks[{{ $task->id }}][important]" class="form-control">
+                            <option value="0" {{ $task->important == 0? 'selected' : '' }}>No
+                            </option>
+                            <option value="1" {{ $task->important == 1? 'selected' : '' }}>Yes
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="tasks[{{ $task->id }}][urgent]" class="form-control">
+                            <option value="0" {{ $task->urgent == 0? 'selected' : '' }}>No
+                            </option>
+                            <option value="1" {{ $task->urgent == 1? 'selected' : '' }}>Yes
+                            </option>
+                        </select>
+                    </td>
                     <td>
                         <select name="tasks[{{ $task->id }}][progress]" class="form-control">
                             <option value="0.0" {{ $task->progress == 0.0? 'selected' : '' }}>0 %
@@ -40,6 +62,19 @@
             @endforeach
             <tr>
                 <td><input type="text" name="tasks[new][priority]" class="form-control"/></td>
+
+                <td>
+                    <select name="tasks[new][important]" class="form-control">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tasks[new][urgent]" class="form-control">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </td>
                 <td>
                     <select name="tasks[new][progress]" class="form-control">
                         <option value="0.0">0 %
