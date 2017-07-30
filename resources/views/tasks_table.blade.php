@@ -17,6 +17,9 @@
             <th class="col-lg-5 col-md-6 col-sm-7">
                 Description
             </th>
+            <th class="col-lg-2 col-md-3 col-sm-5">
+                When
+            </th>
             <th class="col-lg-1 col-md-1 col-sm-1"></th>
             </thead>
             <tbody>
@@ -55,6 +58,9 @@
                     </td>
                     <td><input type="text" name="tasks[{{ $task->id }}][name]" class="form-control"
                                value="{{ $task->name }}"/></td>
+
+                    <td><input type="text" name="tasks[{{ $task->id }}][when]" class="form-control"
+                               value="{{ $task->when }}"/></td>
                     <td>
                         <a href="{{ action('TaskController@remove', ['id' => $task->id, 'type' => $type]) }}"
                            class="btn btn-danger">X</a></td>
@@ -87,6 +93,9 @@
                 </td>
                 <td><input type="text" name="tasks[new][name]" placeholder="New Task" class="form-control"/>
                 </td>
+                <td><input type="text" name="tasks[new][when]" placeholder="When" class="form-control"/>
+                </td>
+                <td></td>
             </tr>
             </tbody>
         </table>

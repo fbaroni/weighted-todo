@@ -51,6 +51,7 @@ class TaskRepository
         $task->priority = $requestTask['priority'] != '' ? $requestTask['priority'] : 0;
         $task->progress = $requestTask['progress'] != '' ? $requestTask['progress'] : 0.0;
         $task->name = $requestTask['name'];
+        $task->when = $requestTask['when'];
         $task->important = $requestTask['important'];
         $task->urgent = $requestTask['urgent'];
 
