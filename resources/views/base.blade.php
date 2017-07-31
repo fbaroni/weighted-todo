@@ -18,7 +18,7 @@
         }
 
         .medium-col {
-            width: 7%;
+            width: 7.5%;
         }
 
         .body {
