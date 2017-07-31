@@ -14,7 +14,7 @@
             <th class="medium-col">
                 Progress
             </th>
-            <th class="col-lg-5 col-md-6 col-sm-7">
+            <th class="col-lg-4 col-md-5 col-sm-6">
                 Description
             </th>
             <th class="col-lg-2 col-md-3 col-sm-5">
