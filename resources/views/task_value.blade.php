@@ -4,5 +4,6 @@
             <h3>{{ $title }}</h3>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
+            {{ $valuation }}
         </div>
     </div>
